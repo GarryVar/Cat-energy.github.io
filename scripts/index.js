@@ -1,51 +1,20 @@
-(() => {
-  let pageHeader = document.querySelector('.page-header');
-  let nav = pageHeader.querySelector('.main-nav');
-  let brg = pageHeader.querySelector('.page-header__burger');
-  let brgNav = pageHeader.querySelector('.page-header__burger-nav');
-  let closeNav = pageHeader.querySelector('.page-header__burger-close-nav');
-  const main = document.querySelector('main');
+let nav = document.querySelector('.main-nav');
+
+const toggleStates = (elem, selector) => {
+  !elem.classList.contains(selector) ?
+  elem.classList.add(selector) :
+  elem.classList.remove(selector);
+}
+
+toggleStates(nav, 'main-nav--hide');
+
+const navBurgerButton = document.querySelector('.page-header__burger');
+
+navBurgerButton.addEventListener('click', (evt) => {
+  console.log(navBurgerButton.children);
+  Array.from(navBurgerButton.children).forEach(item => toggleStates(item, 'page-header__burger--hidden'))
+  toggleStates(nav, 'main-nav--hide');
+})
 
 
-  function hideBrgNav() {
-    brgNav.classList.add('page-header__burger-nav--hidden');
-  }
 
-
-  function showBrgNav() {
-    brgNav.classList.remove('page-header__burger-nav--hidden');
-  }
-
-
-  function showNavClose() {
-    closeNav.classList.remove('page-header__burger-close-nav--hidden');
-  }
-
-
-  function hideNavClose() {
-    closeNav.classList.add('page-header__burger-close-nav--hidden');
-  }
-
-
-  function hideNavigation(hidenavCls, showBrg) {
-    nav.classList.add('main-nav--hide');
-    hidenavCls();
-    showBrg();
-  }
-
-  hideNavigation(hideNavClose, showBrgNav);
-
-
-  function showNavigation() {
-    nav.classList.remove('main-nav--hide');
-  }
-
-
-  brg.addEventListener('click', e => {
-    nav.classList.toggle('main-nav--hide');
-        hideBrgNav();
-        showNavClose();
-
-    nav.classList.contains('main-nav--hide') ? hideNavigation(hideNavClose, showBrgNav) : false
-  })
-})();
